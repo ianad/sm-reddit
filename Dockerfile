@@ -1,7 +1,10 @@
 FROM jupyter/datascience-notebook:latest
 
+USER root
+
 RUN apt-get update
 
-COPY requirements.txt requirements.txt
+COPY init init
+COPY work work
 
-RUN pip install --no-cache -r requirements.txt
+RUN pip install --no-cache -r init/requirements.txt
