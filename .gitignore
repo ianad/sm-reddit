@@ -5,7 +5,8 @@ _secrets.py
 test
 
 # exclude data from source control by default
-/data/
+# include data for now
+# /data/
 
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
