@@ -55,10 +55,10 @@ def jargon_score(obj):
         
     # defining Rules as lambda functions in a list so len(ruleset) can be referenced later
     # each returning a boolean value cast as a float to allow for later weighting
-    ruleset = [
+    ruleset = (
         lambda token: float(str.isupper(token[0])), # first letter in token is capitalized
         lambda token: float(token not in english_dictionary), # token is not an english word
-    ]
+    )
 
     # Create dummy scores object 
     # Should be 2 dimensional 
