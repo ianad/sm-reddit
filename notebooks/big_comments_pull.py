@@ -1,11 +1,9 @@
-import praw
-from _secrets import user_agent, client_id, client_secret
+from utils import initialize_reddit
+
 import pandas as pd
 from tqdm import tqdm
 
-reddit = praw.Reddit(user_agent='Update Comments Corpus, /u/Holden-McRoyne',
-                     client_id=client_id,
-                     client_secret=client_secret)
+reddit = initialize_reddit(user_agent='Update Comments Corpus, /u/Holden-McRoyne')
 
 submissions = pd.read_csv('../data/submissions.csv')['id']
 comments = pd.read_csv('../data/comments.csv')

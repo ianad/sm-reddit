@@ -1,15 +1,15 @@
 import praw
-from _secrets import user_agent, client_id, client_secret
+from _secrets import default_user_agent, client_id, client_secret
 import pandas as pd
 from tqdm import tqdm
 import numpy as np
 
 
 
-def initialize_reddit(agent_string = user_agent):
-    reddit = praw.Reddit(user_agent = agent_string,
-                        client_id=client_id,
-                        client_secret=client_secret)
+def initialize_reddit(user_agent = default_user_agent):
+    reddit = praw.Reddit(user_agent = user_agent,
+                        client_id = client_id,
+                        client_secret = client_secret)
     return(reddit)
 
 
