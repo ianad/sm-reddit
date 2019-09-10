@@ -51,7 +51,7 @@ def jargon_score(obj):
         raise ValueError("`obj` should be 1-dimensional")
     
     # placeholder dictionary
-    english_dictionary = ['a', 'the', 'but', 'yes', 'no', 'fizz', 'buzz', 'hello', 'world']
+    english_dictionary = ['a', 'the', 'but', 'yes', 'no', 'fizz', 'buzz', 'hello', 'world', 'quick', 'brown', 'fox']
         
     # defining Rules as lambda functions in a list so len(ruleset) can be referenced later
     # each returning a boolean value cast as a float to allow for later weighting
@@ -80,5 +80,6 @@ def jargon_score(obj):
     
     # Return final scores obj
     # Alternatively, mean out all the scores and return a 1-dimensional array same shape with `obj`
+    # Weighted mean function?
     return(scores_obj)
 
