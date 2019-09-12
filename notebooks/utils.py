@@ -83,3 +83,41 @@ def jargon_score(obj):
     # Weighted mean function?
     return(scores_obj)
 
+def praw2series(praw_obj, filter=False):
+       
+    try:
+        praw_obj.name
+    except:
+        raise Warning(f'Encountered an error querying the {type(praw_obj)} model.')
+    else:
+        obj_dict = praw_obj.__dict__
+
+    if filter:
+        # filter out the praw objects in the series
+        raise Warning(f'Filtering not implemented.')
+    
+    return(obj_dict)
+
+def sample_subreddit():
+    reddit = initialize_reddit(user_agent='Sample subreddit getter')
+    
+    subreddit_name = pd.read_csv('../data/subreddits.csv')['display_name'].sample(1)
+    subreddit_name = subreddit_name[subreddit_name.index[0]]
+
+    return(reddit.subreddit(subreddit_name))
+
+def sample_submission(from_subreddit=None):
+    reddit = initialize_reddit(user_agent='Sample submission getter')
+    
+    if from_subreddit: # is specified
+        subreddit = reddit.subreddit(from_subreddit)
+    else:
+        subreddit = sample_subreddit()
+
+    submission = subreddit.random()
+
+    return(submission)
+
+# def sample_comment():
+#     reddit = initialize_reddit(user_agent='Sample comment getter')
+#     submission = sample_submission()
