@@ -119,13 +119,20 @@ def sample_submission(from_subreddit=None):
 
     return(random_submission)
 
-def sample_comment():
+def sample_comment(from_subreddit=None, from_submission=None):
     reddit = initialize_reddit(user_agent='Sample comment getter')
 
+    if from_submission: # is specified
+        submission = reddit.submission(from_submission)
+    if from_subreddit: # is specified
+        submission = sample_submission(from_subreddit)
+    else:
+        submission = sample_submission()
+        
     comments = []
     while len(comments) < 1:
         try:
-            comments = [c for c in sample_submission().comments]
+            comments = [c for c in submission.comments]
         except AttributeError:
             pass
     
