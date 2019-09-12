@@ -3,7 +3,7 @@ from _secrets import default_user_agent, client_id, client_secret
 import pandas as pd
 from tqdm import tqdm
 import numpy as np
-
+import random
 
 
 def initialize_reddit(user_agent = default_user_agent):
@@ -104,7 +104,8 @@ def sample_subreddit():
     subreddit_name = pd.read_csv('../data/subreddits.csv')['display_name'].sample(1)
     subreddit_name = subreddit_name[subreddit_name.index[0]]
 
-    return(reddit.subreddit(subreddit_name))
+    random_subreddit = reddit.subreddit(subreddit_name)
+    return(random_subreddit)
 
 def sample_submission(from_subreddit=None):
     reddit = initialize_reddit(user_agent='Sample submission getter')
@@ -114,10 +115,19 @@ def sample_submission(from_subreddit=None):
     else:
         subreddit = sample_subreddit()
 
-    submission = subreddit.random()
+    random_submission = subreddit.random()
 
-    return(submission)
+    return(random_submission)
 
-# def sample_comment():
-#     reddit = initialize_reddit(user_agent='Sample comment getter')
-#     submission = sample_submission()
+def sample_comment():
+    reddit = initialize_reddit(user_agent='Sample comment getter')
+
+    comments = []
+    while len(comments) < 1:
+        try:
+            comments = [c for c in sample_submission().comments]
+        except AttributeError:
+            pass
+    
+    random_comment = random.choice(comments)
+    return(random_comment)
