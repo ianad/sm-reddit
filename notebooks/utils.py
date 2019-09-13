@@ -64,7 +64,7 @@ def jargon_score(obj):
     # Should be 2 dimensional 
     ## dim_1 = len(array_obj) 
     ## dim_2 = len(ruleset)
-    scores_obj = np.empty(
+    all_scores = np.empty(
         (array_obj.shape[0],
          len(ruleset))
     )
@@ -75,13 +75,12 @@ def jargon_score(obj):
         for r, rule in enumerate(ruleset):
             score = rule(token)
             # apply each rule lambda in `ruleset` to each token in `array_obj`
-            scores_obj[t,r] = score
+            all_scores[t,r] = score
             pass
     
-    # Return final scores obj
-    # Alternatively, mean out all the scores and return a 1-dimensional array same shape with `obj`
-    # Weighted mean function?
-    return(scores_obj)
+    # Mean out all the scores and return a 1-dimensional array same shape with `obj`
+    scores = np.array([v.mean() for v in all_scores])
+    return(scores)
 
 def praw2series(praw_obj, filter=False):
        
